@@ -17,8 +17,11 @@ describe User do
       fill_in 'Password', :with => 'mattrails'
       fill_in 'Password confirmation', :with => 'mattrails'
       click_button 'Sign up'
+      visit new_user_session_path 
+      fill_in 'Email', :with => 'matt@rails.com'
+      fill_in 'Password', :with => 'mattrails'
+      click_button 'Sign in'
       page.should have_content("Signed in as matt@rails.com")
-      current_path.should == root_path
     end
   end
 

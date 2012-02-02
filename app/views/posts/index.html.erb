@@ -16,13 +16,13 @@
     <td><%= post.title %></td>
     <td><%= post.content %></td>
     <td><%= post.user.first_name + ' ' + post.user.last_name %></td>
-    <td><%= link_to 'Show', post %></td>
-    <td><%= link_to 'Edit', edit_post_path(post) %></td>
-    <td><%= link_to 'Destroy', post, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Show', user_post_path(current_user, post) %></td>
+    <td><%= link_to 'Edit', edit_user_post_path(current_user, post) %></td>
+    <td><%= link_to 'Destroy', user_post_path(current_user, post), confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Post', new_post_path %>
+<%= link_to 'New Post', new_user_post_path(current_user) %>
