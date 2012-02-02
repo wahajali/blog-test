@@ -1,5 +1,24 @@
 require 'spec_helper'
 
 describe Post do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+ it "should not be valid without content" do
+   post = Factory(:post, :content => nil)
+   post.should_not be_valid
+ end
+
+ it "should be valid with content" do
+   post = Factory(:post)
+   post.should be_valid
+ end
+
+ it "should not be valid without user" do
+   post = Factory(:post, :user_id => nil)
+   post.should_not be_valid
+ end
+
+ it "should be valid with user" do
+   post = Factory(:post)
+   post.should be_valid
+ end
 end
