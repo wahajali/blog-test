@@ -1,7 +1,8 @@
 source 'http://rubygems.org'
 
-# Bundle edge Rails instead:
 gem 'rails', '3.2.1'
+
+gem 'therubyracer'
 
 gem 'mysql2'
 
