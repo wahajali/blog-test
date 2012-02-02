@@ -1,9 +1,12 @@
 BlogTest::Application.routes.draw do
-  devise_for :users
 
-  resources :posts
+  devise_for :users, :path => :account
 
-  root :to => 'posts#index'
+  resources :users do 
+    resources :posts
+  end
+
+  root :to => 'users/:id/posts'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
