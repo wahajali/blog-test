@@ -3,6 +3,8 @@ source 'http://rubygems.org'
 # Bundle edge Rails instead:
 gem 'rails', '3.2.0'
 
+gem 'therubyracer'
+
 gem 'mysql2'
 
 gem 'json'
