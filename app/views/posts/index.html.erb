@@ -1,10 +1,11 @@
 <h1>Listing posts</h1>
+<h2> There are currently <%= pluralize @posts.size, 'post' %>.</h2>
 
 <table>
   <tr>
     <th>Title</th>
     <th>Content</th>
-    <th>User</th>
+    <th>Posted By</th>
     <th></th>
     <th></th>
     <th></th>
@@ -14,7 +15,7 @@
   <tr>
     <td><%= post.title %></td>
     <td><%= post.content %></td>
-    <td><%= post.user_id %></td>
+    <td><%= post.user.first_name + ' ' + post.user.last_name %></td>
     <td><%= link_to 'Show', post %></td>
     <td><%= link_to 'Edit', edit_post_path(post) %></td>
     <td><%= link_to 'Destroy', post, confirm: 'Are you sure?', method: :delete %></td>
