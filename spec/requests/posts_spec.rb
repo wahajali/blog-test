@@ -1,11 +1,76 @@
 require 'spec_helper'
 
-describe "Posts" do
-  describe "GET /posts" do
-    it "works! (now write some real specs)" do
-      # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
-      get posts_path
-      response.status.should be(200)
-    end
+describe Posts, "that have already been created" do
+
+  before do
+    @post = Factory(:post)
+  end
+
+  it "should display listing by title" do
+    visit posts_path
+    page.should have_content(@post.title)
+  end
+
+  it "should display post title in show page" do
+    visit post_path(@post)
+    page.should have_content(@post.title)
+  end
+
+  it "should display post content in show page" do
+    visit post_path(@post)
+    page.should have_content(@post.content)
+  end
+
+  it "should allow post to be editable" do
+    visit posts_path
+    click_link 'Edit'
+    fill_in 'Content', :with => 'test content'
+    click_button('Create')
+    page.should have_content('Post successfully edited')
+    visit post_path(@post)
+    page.should have_content('test content')
+  end
+
+  it "should show number of blog posts" do
+    page.should have_content('1 Post')
+  end
+
+  it "should list user who posted the blog" do
+    page.should have_content(@post.user.name)
   end
 end
+
+describe Post, "creation process" do
+  it "should create a post and notify user" do
+    visit new_post_path
+    fill_in 'Title', :with => 'test post'
+    fill_in 'Content', :with => 'test content'
+    click_button('Create')
+    page.should have_content('Post successfully created')
+  end
+
+  it "should list all new articles" do
+    visit new_post_path
+    fill_in 'Title', :with => 'test post'
+    fill_in 'Content', :with => 'test content'
+    click_button('Create')
+    page.should have_content('test post')
+  end
+end
+
+describe Post, "that have some information missing" do
+  it "should not create post and display error if title is missing" do
+    visit new_post_path
+    fill_in 'Content', :with => 'test content'
+    click_button('Create')
+    page.should have_content('Title is required to create a post')
+  end
+
+  it "should not create post and display error if content is missing" do
+    visit new_post_path
+    fill_in 'Content', :with => 'test content'
+    click_button('Create')
+    page.should have_content('Content is required to create a post')
+  end
+end
+

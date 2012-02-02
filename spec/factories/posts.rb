@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :post do
-    title "MyString"
+    sequence(:title){|n| "MyString#{n}"}
     content "MyText"
     association :user
   end
